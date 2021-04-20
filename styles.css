@@ -1,0 +1,28 @@
+body {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+.container {
+  display: grid;
+  place-items: center;
+  height: 100vh;
+}
+
+.stage {
+  background-color: aquamarine;
+  display: grid;
+  width: 60vh;
+  height: 60vh;
+  border-radius: 20px;
+  grid-template-columns: repeat(10, 1fr);
+  grid-template-rows: repeat(10, 1fr);
+}
+
+.selector {
+  border: royalblue 4px solid;
+}
+
+.selected {
+  border: sandybrown 6px solid;
+}
