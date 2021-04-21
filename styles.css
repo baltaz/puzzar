@@ -10,13 +10,17 @@ body {
 }
 
 .stage {
-  background-color: aquamarine;
+  background-color: gray;
   display: grid;
   width: 60vh;
   height: 60vh;
   border-radius: 20px;
+  grid-template-rows: repeat(12, 1fr);
   grid-template-columns: repeat(10, 1fr);
-  grid-template-rows: repeat(10, 1fr);
+}
+
+.block {
+  border-radius: 4px;
 }
 
 .selector {
