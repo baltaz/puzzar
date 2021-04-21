@@ -4,13 +4,15 @@ body {
   box-sizing: border-box;
 }
 .container {
+  background-color: #000;
   display: grid;
   place-items: center;
   height: 100vh;
 }
 
 .stage {
-  background-color: gray;
+  background-image: url("background.png");
+  background-color: #000;
   display: grid;
   width: 60vh;
   height: 60vh;
@@ -29,4 +31,9 @@ body {
 
 .selected {
   border: sandybrown 6px solid;
+}
+
+.score {
+  color: #fff;
+  font-size: 18px;
 }

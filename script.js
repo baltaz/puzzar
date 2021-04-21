@@ -2,7 +2,8 @@ import {stages} from './stages.js';
 import {getBlockColor} from './utils.js';
 
 const stage = document.querySelector(".stage");
-const level = 0;
+let level = 0;
+let points = 0;
 
 const selector = { row:0, column:0, selected: false}
 
@@ -12,6 +13,7 @@ const createMap = () =>{
             const block = document.createElement("div");
             block.classList.add("block");
             block.id=`${row}${column}`;
+            block.draggable=true;
             block.style.gridArea=`${row+1}/${column+1}`;
             block.style.backgroundColor = getBlockColor(grid[row][column]);
             stage.appendChild(block);
@@ -58,13 +60,16 @@ const swapBlocks = (row,column,blockColor,direction) =>{ //unificar swap / gravi
 }
 
 const gravityFall = (row, column, blockColor)=>{ //agregar un dalay en la caida
-    for (row; row < 11; row++) {
+    let stop =false // to stop for when all blocks falled
+    for (; !stop ; row++) { //refactor
         if(!(grid[row+1][column])){
-            if(selector.row==row){selector.row++}
-            swapBlocks(row,column,blockColor,"down");
-            
+            if(selector.row==row) selector.row++; //si no es el bloque movido
+            swapBlocks(row,column,blockColor,"down"); 
+        }else{
+            stop = true;
         }
     }
+    checkMatch(row-1, column, blockColor);
 }
 
 const checkCollision = (row, column, direction)=>{
@@ -78,9 +83,41 @@ const checkCollision = (row, column, direction)=>{
         }
         column +=i;
         selector.column +=i;
-        gravityFall(row, column, grid[row][column]);
+        gravityFall(row, column, grid[row][column]);            //maybe i can unifique with the previous for
+        //checkear para todos los bloques si hay matching
     }
 }
+
+
+const deleteBlock = (row,column)=>{
+    editBlock(row,column,0);
+    grid[row][column]=0;
+}
+
+
+const checkMatch = (row, column, colorBlock) =>{
+    if((grid[row+1][column]==colorBlock) || (grid[row][column+1]==colorBlock) || (grid[row][column-1]==colorBlock)){
+        if(grid[row+1][column]==colorBlock){
+            deleteBlock(row+1,column);
+            deleteBlock(row,column);                      
+        }
+        if(grid[row][column+1]==colorBlock){
+            deleteBlock(row,column+1);
+            deleteBlock(row,column);
+        }
+        if(grid[row][column-1]==colorBlock){
+            deleteBlock(row,column-1);
+            deleteBlock(row,column);
+            selector.selected=false;
+        }
+        selector.selected=false;                            //crear funcion "descelect"
+        selectorNode.classList.remove("selected");          //crear funcion "descelect"
+        const score = document.querySelector(".score");
+        score.textContent = ++points;
+    }
+}
+
+
 
 const move = direction =>{
     switch (direction) {
@@ -117,9 +154,8 @@ createMap();
 const selectorNode = createSelector();
 
 //disapear collapsed blocks with same color (POINT)
-//let move selector only on block != 9
 //////////////////////////////////////
+//let move selector only on block != 9
 //pending blocks panel
 //score panel
 //combos
-//open stages from JSON
