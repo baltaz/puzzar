@@ -1,27 +1,31 @@
+@import url("https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;700&display=swap");
+
+
 body {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
+  font-family: "Baloo 2", cursive;
 }
 .container {
-  background-color: #000;
   display: grid;
   place-items: center;
   height: 100vh;
+  grid-template-rows: 100px 1fr 100px;
 }
 
 .stage {
-  background-image: url("background.png");
+  background-color: #FAFAFA;
   display: grid;
-  width: 60vh;
-  height: 60vh;
+  width: 40vh;
+  height: 48vh;
   border-radius: 20px;
   grid-template-rows: repeat(12, 1fr);
   grid-template-columns: repeat(10, 1fr);
 }
 
 .block {
-  border-radius: 4px;
+
 }
 
 .selector {
@@ -32,7 +36,28 @@ body {
   border: sandybrown 6px solid;
 }
 
-.score {
+.logo{
+  font-weight: bold;
+  color: #455A64;
+  font-size: 32px;
+  justify-self: start;
+}
+
+.container > header{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.score{
   color: #fff;
   font-size: 18px;
+  font-weight: bold;
+  background-color: #455A64;
+  border-radius: 16px;
+  padding: 16px 16px;
+  vertical-align:middle;
+  width: 50%;
+  justify-self: end;
+  text-align: right;
+  height: fit-content;
 }

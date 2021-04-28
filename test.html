@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test</title>
+</head>
+<body>
+    <div class="container">
+        <div class="block blue"></div>
+        <div class="block red"></div>
+    </div>
+</body>
+
+<style>
+    body{
+        margin: 0; padding: 0; box-sizing: border-box;
+        background-color: seashell;
+    }
+    .container{
+        margin: 0 auto;
+        width: 80vw;
+        height: 70vh;
+        border: 6px solid rgba(0,0,0,0.015);
+        display:grid;
+        justify-items: center;
+/*         align-items: center; */
+    }
+    .block{
+        width: 64px;
+        height: 64px;
+        border-radius:10px;
+        border: 3px solid rgba(0, 0, 0, 0.3);
+        box-shadow: inset 6px 6px 5px rgba(256, 256, 256, 0.3), inset -20px -20px 20px rgba(256, 256, 256, 0.2), inset -5px -5px 10px rgba(0, 0, 0, 0.4), inset 20px 20px 20px rgba(0, 0, 0, 0.2) 
+    }
+    .blue{
+        background-color: aquamarine;
+    }
+    .red{
+        background-color:tomato;
+    }
+    </style>
+    <script>
+        let y= 0, x=100, g=0.06,i=0;
+        const block=document.querySelector(".block");
+        const container= document.querySelector(".container")
+
+        const animate = () =>{
+            y= Math.pow(i,2)*g
+            console.log(y);
+            console.log(container.style.height);
+            if(y<= container.innerHeight){
+                block.style.transform = `translate(${x}px, ${y}px)`;
+                window.requestAnimationFrame(animate);
+                i++
+            }
+        }
+    animate();
+    </script>
+</html>
